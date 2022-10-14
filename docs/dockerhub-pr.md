@@ -1,9 +1,13 @@
 # Create Pull Request with DockerHub
 
-The second job in the Container/Docker automation. This has to run after when any new RootFS file is created from the scan and build step. 
-This job has the ability to generate change-log by comparing new image created in this process 
-and the INPUT_TAG. It also setup necessary git branches required to for publishing RootFS files, 
-and create a pull request with the official docker hub library. Complete content of the PR is 
+The second job in the Container/Docker automation. 
+
+- This has to run after when any new RootFS file is created from the scan and build step. 
+- This job has the ability to generate change-log by comparing new image created in this process and compare 
+to current production image. 
+- It also setup necessary git branches required to for publishing RootFS files, 
+and 
+- Creates a new pull request with the official docker hub library. Complete content of the PR is 
 automatically crated.
 
 https://github.com/docker-library/official-images/pull/13267
@@ -13,7 +17,7 @@ of existing production branches
 
 ## Build Requirements
 
-### `NOFAIL` Option
+### `NO_FAIL` Option
 - When production branch already exists, job will fail to recreate but reuse. In case existing production branch has issues, it has to removed or renamed, so that this pipeline will create new set of branches. Use `NO_FAIL` to true for reusing exisitng production branch.
 
 ![image](https://user-images.githubusercontent.com/1273137/195861377-34038eb8-fbb2-4dc7-a4c0-c51b8040f32d.png)
@@ -46,6 +50,7 @@ of existing production branches
 
 
 ### Full View
+
 ![image](https://user-images.githubusercontent.com/1273137/195858193-02e13b77-42b7-4260-b324-e3506c2d268f.png)
 
 
