@@ -1,6 +1,11 @@
 # Scan for updates and build RootFS
 
-The first job in the container/docker image RootFS file creation process. This job runs in a schedule; check for any security updates released since the last release of the image. AlmaLinux native dnf search and 3rd party grype are used for the security scanning process. When one or more security updates are found, it continues to create RootFS files for publishing the image. We can choose to for the job to create RootFS file even when there are NO new security updates found
+The first job in the container/docker image RootFS file creation process. This job runs in a schedule or as needed on demand. 
+
+- Takes container image tag name as input
+- Check for any security updates released since the last release of the image. AlmaLinux native dnf search and 3rd party grype are used for the security scanning process. 
+- When one or more security updates are found, it continues to create RootFS files for publishing the image. We can choose to for the job to create RootFS file even when there are NO new security updates found
+- When RootFS files created were uploaded as branches in the https://github.com/almalinuxautobot/docker-images (ci-devel) repository for later steps processing.
 
 ## Job Build View
 
@@ -18,6 +23,16 @@ or `almalinux:9.0-20220901`
 - `GIT_REPO`, Optional Filed. Location of job `scripts and Dockerfile` templates
 - `FORCE_BUILD_ROOTFS`, Optional field. By design, RootFS files are only created when there are some security package(s) updates found. 
 That can be overwritten by setting this field to `true`
+
+## Pipeline graphs
+
+### Security scan only, when no update found
+
+![image](https://user-images.githubusercontent.com/1273137/195827872-a9d6292a-1107-4035-bfb6-6b4c272904fc.png)
+
+### Security scan and RootFS build, when update(s) found
+
+![image](https://user-images.githubusercontent.com/1273137/195828324-8aea8dfc-2cbb-4f54-b40e-aa6f60f4d48e.png)
 
 
 ### Sample log output
